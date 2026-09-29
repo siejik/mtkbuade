@@ -1,4 +1,4 @@
-# PRD — Latihan Soal TKA Matematika SMA 2025
+# PRD — Pemaparan, Tips dan Trik Penyelesaian Soal - Soal TKA (Matematika SMA 2025)
 
 ## Tujuan
 Website latihan 25 soal TKA Matematika. Soal tampil satu-satu, bisa pilih jawaban, langsung muncul BENAR/SALAH + pembahasan langkah demi langkah berdasarkan foto kunci jawaban (@mathforall_).
