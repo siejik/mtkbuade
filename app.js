@@ -32,3 +32,13 @@ function skip(){S[cur].skip=true;save();nav();next(1)}
 function retry(){S[cur]={sel:[]};save();render()}
 $('reset').onclick=()=>{if(confirm('Hapus semua progres?')){S={};save();go(Q[0].no)}};
 go(cur);
+// ===== PDF (cetak dari browser) =====
+const pick_=new Set(Q.map(q=>q.no));
+function drawPick(){$('pick').innerHTML=Q.map(q=>`<label><input type="checkbox" ${pick_.has(q.no)?'checked':''} onchange="tglP(${q.no})"> ${q.no}</label>`).join('');$('pGo').textContent=`Buat PDF (${pick_.size} soal)`;$('pGo').disabled=!pick_.size}
+function tglP(n){pick_.has(n)?pick_.delete(n):pick_.add(n);drawPick()}
+$('pdfbtn').onclick=()=>{drawPick();$('modal').hidden=false};$('pClose').onclick=()=>$('modal').hidden=true;
+$('pAll').onclick=()=>{Q.forEach(q=>pick_.add(q.no));drawPick()};$('pNone').onclick=()=>{pick_.clear();drawPick()};
+$('pGo').onclick=()=>{$('print').innerHTML=TKAPrint.doc(Q.filter(q=>pick_.has(q.no)));
+let st=document.getElementById('pcss');if(!st){st=document.createElement('style');st.id='pcss';document.head.appendChild(st)}
+st.textContent=`@media print{${TKAPrint.css} html,body{background:#0b1020!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.app,.blob,.modal{display:none!important}#print{display:block!important}}`;
+$('modal').hidden=true;setTimeout(()=>window.print(),300)};

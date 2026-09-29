@@ -28,3 +28,15 @@ SELESAI: 25/25 soal sudah masuk. Tipe: single, multi, category (tabel Benar/Sala
 3. Gambar soal masih berupa crop halaman utuh (termasuk opsi); rapikan bila perlu. Soal 14 opsi = gambar grafik (p15-p16), opsi teks di web hanya koordinatnya.
 4. Opsional: KaTeX untuk pecahan/pangkat, timer, skor akhir, mode acak.
 5. Deploy Vercel: `vercel --prod` di folder ini (static, tanpa build).
+
+## Versi PPT (update 3)
+- File: `ppt/Tips-Trik-Soal-TKA.pptx`, dibuat otomatis dari `data/questions.js` + `data/questions2.js` oleh `ppt/build.js` (pptxgenjs + sharp). Jalankan: `cd ppt && node build.js`.
+- Isi: slide pembuka (Assalamu'alaikum + judul), lalu per soal: slide Soal → slide Gambar (jika ada, 1 slide per gambar) → slide Pembahasan (badge "Sesuai kunci foto"/"Buatan AI", versi ganda kunci vs Claude untuk nomor 12, 20, 25), penutup (Terima kasih + Wassalamu'alaikum). Total ±75 slide.
+- Validasi file lolos; render diperiksa lewat LibreOffice (sebagian slide saja).
+- Catatan/TODO: gambar soal masih crop halaman PDF utuh (masih ada sisa header kecil di beberapa gambar & tampil kecil); teks pembahasan pendek masih berukuran kecil dan bisa diperbesar; nomor 20 & 25 versi kunci hanya berupa teks (foto kunci tidak dimasukkan ke PPT). Ubah judul di konstanta `TITLE` pada build.js.
+
+## Fitur PDF (update 4)
+- Di web: tombol "Buat PDF (pilih soal)" -> modal centang nomor soal -> `window.print()` (Simpan sebagai PDF; aktifkan Background graphics). Render lewat `print.js` (`TKAPrint.doc/css`), sisi browser di akhir `app.js`.
+- PDF statis semua soal: `Soal-Lengkap-TKA.pdf` (50 hlm, tombol "Unduh PDF semua soal" di sidebar). Buat ulang: `node make-pdf.js && python3 -c "import weasyprint;weasyprint.HTML('_print.html').write_pdf('Soal-Lengkap-TKA.pdf')"` (perlu `pip install weasyprint`). Wajib dijalankan ulang tiap data soal berubah.
+- Isi tiap soal: soal + gambar, opsi (jawaban benar ditandai), pembahasan (versi ganda kunci vs Claude bila ada), lalu foto coretan kunci asli di halaman sendiri.
+- Belum dites: tombol Buat PDF di Chrome/HP sungguhan (hanya PDF statis yang sudah dirender & dicek visual).
