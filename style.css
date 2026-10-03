@@ -33,3 +33,12 @@ details summary{cursor:pointer;color:var(--m);margin-top:8px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10;display:flex;align-items:center;justify-content:center;padding:16px}.modal[hidden]{display:none}
 .modal .box{padding:24px;max-width:520px;width:100%;background:rgba(20,26,52,.92)}.modal h3{margin:0 0 12px}.pick{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
 .pick label{display:flex;gap:6px;align-items:center;padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,.15);cursor:pointer;font-size:14px}.hint{font-size:12px;color:var(--m)}#print{display:none}
+.lv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.lv button{padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:var(--t);font-weight:700;cursor:pointer;font-size:13px}
+.lv button small{display:block;font-weight:400;color:var(--m);font-size:11px}.lv .cur{background:linear-gradient(135deg,#6366f1,#ec4899);border-color:transparent}.lv .cur small{color:#fff}
+#cvfab{position:fixed;right:18px;bottom:18px;z-index:9;padding:14px 18px;border-radius:99px;border:0;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+#cvbox{position:fixed;right:18px;bottom:78px;z-index:9;width:min(560px,94vw);height:min(460px,60vh);min-width:280px;min-height:240px;resize:both;overflow:hidden;display:none;flex-direction:column;background:#fff;border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.5);border:1px solid #cbd5e1}
+#cvbox.open{display:flex}#cvbar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:8px;background:#f1f5f9;color:#0f172a;font-size:13px}
+#cvbar button{padding:6px 10px;border-radius:8px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}#cvbar button.on{background:#6366f1;color:#fff;border-color:#6366f1}
+#cvbar i{width:20px;height:20px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #94a3b8;cursor:pointer;display:inline-block}#cvbar i.on{box-shadow:0 0 0 3px #6366f1}
+#cvwrap{flex:1;position:relative;touch-action:none}#cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+@media print{#cvfab,#cvbox{display:none!important}}

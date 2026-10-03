@@ -40,3 +40,25 @@ SELESAI: 25/25 soal sudah masuk. Tipe: single, multi, category (tabel Benar/Sala
 - PDF statis semua soal: `Soal-Lengkap-TKA.pdf` (50 hlm, tombol "Unduh PDF semua soal" di sidebar). Buat ulang: `node make-pdf.js && python3 -c "import weasyprint;weasyprint.HTML('_print.html').write_pdf('Soal-Lengkap-TKA.pdf')"` (perlu `pip install weasyprint`). Wajib dijalankan ulang tiap data soal berubah.
 - Isi tiap soal: soal + gambar, opsi (jawaban benar ditandai), pembahasan (versi ganda kunci vs Claude bila ada), lalu foto coretan kunci asli di halaman sendiri.
 - Belum dites: tombol Buat PDF di Chrome/HP sungguhan (hanya PDF statis yang sudah dirender & dicek visual).
+
+## UPDATE 5 — 4 LEVEL + CANVAS (STATUS TERAKHIR)
+Permintaan user: web punya 4 level soal yang bisa dipilih + fitur canvas putih coret-coret ala papan Google Meet (pensil + penghapus).
+
+### Sudah selesai
+- Pemilih 4 level di sidebar (kartu Level 1-4), progres localStorage terpisah per level (`tka2`, `tka2_L2`, `tka2_L3`, `tka2_L4`; level terakhir di `tkaLv`). Kode: `LEVELS` + `setLevel()` di `app.js`.
+- Level 1 = 25 soal TKA 2025 (kunci tulisan tangan @mathforall_) — selesai.
+- Level 2 = `soal1.zip` -> `data/level2.js`, 23 soal nomor 24-46 (Paket 1 ANBK/Pusmendik). Kunci = opsi yang tercentang di screenshot; penjelasan ditulis Claude dan semua jawaban sudah dicek ulang secara hitungan (cocok dengan centang). Badge "Sesuai kunci (opsi tercentang)". Gambar soal tidak di-embed; diganti deskripsi teks. Perlu dicek ulang dengan screenshot: no. 34 (kubus ABCDEFGH, penjelasan hanya mengikuti kunci) dan no. 40 (asumsi AB & CD sisi sejajar), no. 31 (nilai diagram dibaca perkiraan).
+- Canvas: `canvas.js` — tombol "Papan Coret" mengambang; panel putih bisa di-resize, alat pensil, penghapus, 5 warna, ketebalan, bersihkan, simpan PNG, tampil di HP (pointer events). Tidak ikut tercetak.
+- PDF statis `Soal-Lengkap-TKA.pdf` (73 hlm, Level 1 + 2) dan PPT `ppt/Tips-Trik-Soal-TKA.pptx` (Level 1 + 2) sudah diregenerasi (`node make-pdf.js` + weasyprint; `cd ppt && node build.js`).
+- Pengujian: logika level/jawaban/kategori/multi/canvas diuji via jsdom (tanpa error); BELUM pernah dibuka di browser sungguhan / HP.
+
+### BELUM selesai (tugas AI berikutnya, urut prioritas)
+1. **Level 3 = `soal2.zip` (11 gambar) dan Level 4 = `soal3.zip` (9 gambar)** -> gambar ada di `source-images/level3/bNN.jpg` dan `source-images/level4/cNN.jpg`. Belum ada jawaban; Claude harus mencari jawaban + penjelasan, `source:'ai'` (di web otomatis berlabel "Jawaban dari AI Claude"). Buat `data/level3.js` (`window.LEVEL3=[...]`) dan `data/level4.js` (`window.LEVEL4=[...]`) dengan skema yang sama seperti `data/level2.js`, lalu muat di `index.html` sebelum `app.js`, dan isi `lo`/`hi` (rentang nomor) di `LEVELS` pada `app.js`. Saat ini level 3 & 4 menampilkan pesan "belum didigitalkan".
+   - Kendala: gambar level 3-4 adalah tangkapan layar rekaman video sebuah PDF "LATIHAN SOAL TKA MATEMATIKA" (13 halaman, bertema Bilangan Rasional/pecahan, tiap layar memuat beberapa soal, teks kecil, banyak tumpang tindih antar screenshot). Disarankan minta user file PDF aslinya atau resolusi lebih tinggi, atau zoom tiap gambar per bagian.
+   - Temuan awal (sudah dihitung, perlu dicocokkan dengan gambar): soal minyak goreng 180 jeriken (opsi 45, 36, 32; tiap keluarga menerima jumlah sama dan lebih dari 1) -> jawaban 45 dan 36; soal beras Januari 2024, 150 karung (opsi 30, 25, 20) -> jawaban 30 dan 25.
+2. Tes manual di browser/HP (layout level selector, canvas di layar sentuh, tombol Buat PDF -> print).
+3. Jika level 3-4 selesai: jalankan ulang `make-pdf.js` (tambahkan `d('level3.js')`, `d('level4.js')` ke gabungan `ALL`) dan `ppt/build.js`, lalu zip lagi.
+4. Opsional: KaTeX, timer, skor akhir, mode acak, embed gambar soal level 2.
+
+### Cara deploy
+Static, tanpa build: `vercel --prod` di folder project (isi: index.html, style.css, app.js, canvas.js, print.js, data/, assets/, Soal-Lengkap-TKA.pdf).

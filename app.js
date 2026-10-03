@@ -1,14 +1,17 @@
-const Q=window.QUESTIONS,TOTAL=25;let cur=Q[0].no,S=JSON.parse(localStorage.tka2||'{}');
-const $=id=>document.getElementById(id),save=()=>localStorage.tka2=JSON.stringify(S);
+const LEVELS={1:{t:'Level 1',sub:'TKA 2025',q:window.QUESTIONS,lo:1,hi:25,key:'tka2'},2:{t:'Level 2',sub:'Paket 1 ANBK',q:window.LEVEL2||[],lo:24,hi:46,key:'tka2_L2'},3:{t:'Level 3',sub:'segera',q:window.LEVEL3||[],lo:1,hi:0,key:'tka2_L3'},4:{t:'Level 4',sub:'segera',q:window.LEVEL4||[],lo:1,hi:0,key:'tka2_L4'}};
+let LV=+(localStorage.tkaLv||1),Q=LEVELS[LV].q,LO=LEVELS[LV].lo,HI=LEVELS[LV].hi,cur=Q.length?Q[0].no:0,S=JSON.parse(localStorage[LEVELS[LV].key]||'{}');
+const $=id=>document.getElementById(id),save=()=>localStorage[LEVELS[LV].key]=JSON.stringify(S);
 const get=n=>Q.find(q=>q.no===n),L=i=>String.fromCharCode(97+i),ol=a=>`<ol>${a.map(x=>`<li>${x}</li>`).join('')}</ol>`;
-function nav(){let h='';for(let n=1;n<=TOTAL;n++){const q=get(n),s=S[n]||{};
+function nav(){let h='';for(let n=LO;n<=HI;n++){const q=get(n),s=S[n]||{};
 const c=!q?'':s.done?(s.right?'ok':'no'):s.skip?'sk':'';
 h+=`<button ${q?'':'disabled'} class="${c} ${n===cur?'cur':''} ${q&&q.source==='ai'?'ai':''}" onclick="go(${n})">${n}</button>`}
 $('nav').innerHTML=h;const d=Object.values(S).filter(s=>s.done),r=d.filter(s=>s.right).length;
-$('stat').innerHTML=`Terjawab ${d.length}/${Q.length} · Benar ${r}<br>Border putus-putus = pembahasan buatan AI`}
-function go(n){cur=n;S[n]=S[n]||{sel:[]};render();window.scrollTo({top:0,behavior:'smooth'})}
+lvbar();$('stat').innerHTML=`Terjawab ${d.length}/${Q.length} · Benar ${r}<br>Border putus-putus = pembahasan buatan AI`}
+function lvbar(){$('lv').innerHTML=[1,2,3,4].map(i=>`<button class="${i===LV?'cur':''}" onclick="setLevel(${i})">${LEVELS[i].t}<small>${LEVELS[i].sub}</small></button>`).join('')}
+function setLevel(i){LV=i;localStorage.tkaLv=i;const L=LEVELS[i];Q=L.q;LO=L.lo;HI=L.hi;S=JSON.parse(localStorage[L.key]||'{}');pick_.clear();Q.forEach(q=>pick_.add(q.no));cur=Q.length?Q[0].no:0;go(cur)}
+function go(n){if(!Q.length){$('main').innerHTML='<h2>Level '+LV+'</h2><div class="q">Soal level ini belum didigitalkan. Gambar sumbernya ada di folder source-images/ pada project (lihat PRD.md, bagian Update 5).</div>';nav();return}cur=n;S[n]=S[n]||{sel:[]};render();window.scrollTo({top:0,behavior:'smooth'})}
 function next(d){const ns=Q.map(q=>q.no),j=ns.indexOf(cur)+d;if(ns[j])go(ns[j])}
-function expl(q){const b=q.source==='ai'?'<span class="tag ai">🤖 Buatan AI · kunci foto belum ada</span>':'<span class="tag key">📷 Sesuai kunci foto</span>';
+function expl(q){const b=q.source==='ai'?'<span class="tag ai">🤖 Jawaban dari AI Claude</span>':(LV===1?'<span class="tag key">📷 Sesuai kunci foto</span>':'<span class="tag key">✅ Sesuai kunci (opsi tercentang)</span>');
 let h=`<b>Pembahasan</b> ${b}`;
 if(q.aiSteps)h+=`<h4>📷 Versi kunci (sesuai foto)</h4>${ol(q.steps)}<h4>🤖 Versi Claude (dikoreksi/diperjelas)</h4><div class="fix">${q.fixNote}</div>${ol(q.aiSteps)}`;
 else h+=ol(q.steps);if(q.note)h+=`<div class="fix">${q.note}</div>`;
@@ -33,7 +36,7 @@ function retry(){S[cur]={sel:[]};save();render()}
 $('reset').onclick=()=>{if(confirm('Hapus semua progres?')){S={};save();go(Q[0].no)}};
 go(cur);
 // ===== PDF (cetak dari browser) =====
-const pick_=new Set(Q.map(q=>q.no));
+const pick_=new Set();Q.forEach(q=>pick_.add(q.no));
 function drawPick(){$('pick').innerHTML=Q.map(q=>`<label><input type="checkbox" ${pick_.has(q.no)?'checked':''} onchange="tglP(${q.no})"> ${q.no}</label>`).join('');$('pGo').textContent=`Buat PDF (${pick_.size} soal)`;$('pGo').disabled=!pick_.size}
 function tglP(n){pick_.has(n)?pick_.delete(n):pick_.add(n);drawPick()}
 $('pdfbtn').onclick=()=>{drawPick();$('modal').hidden=false};$('pClose').onclick=()=>$('modal').hidden=true;
