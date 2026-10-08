@@ -1,0 +1,38 @@
+: y 0)
+6:36 PM & ll
+— Oct 2, 2026
+2 Sebuah usaha rumahan memproduksi sirup jeruk. Sirup tersebut disimpan dalam sebuah drum seperti
+(DD) 6 dari 13
+| —wh
+| Dani satu drum sirup, telah digunakan untuk membuat minuman dan masih tersisa 8 liter
+Setiap | liter sirup dapat dibuat menjadi 5 botol minuman
+Minuman yang sudah jadi kemudian dikemas ke dalam kardus
+Setiap kardus dapat memuat 10 botol minuman
+Perlutungan yang tepat untuk menentukan banyak kardus yang dibutuhkan adalah
+A. (80-8)x 5:10
+B. (8048)x 5:10
+C. (80-8):5x10
+D. (8048):5x10
+| Elemen (21 Bilangan
+| Subelemen | : | Bilangan Rasional
+Kompetensi Kemampuan memahami, mengaplikasikan, bernalar, yang lebih tinggi untuk |
+menyelesaikan permasalahan terkait operasi penjumlahan, pengurangan, perkalian, dan |
+|. 1 pembagian cacah
+Indikator |: | Mengevaluasi kebenaran hasil operasi aritmetika bilangan cacah pada diagram alir
+| Soal
+|, Sebuah program mempunyai dasar berpikir sebagai berikut
+ya Apakah hasilnya tah
+adalah
+kelipatan 6?
+4
+Tentukan benar atau salah pada setiap pernyataan berikut berdasarkan program tersebut
+| Pernyataan | Benar | Salah
+Jika yang dimasukkan adalah bilangan ganjil, maka hasil akhir juga bilangan
+| ganjil | |
+| Hasil akhir adalah nol jika bilangan yang dimasukkan adalah bilangan O | |
+Jika bilangan yang dimasukkan adalah bilangan genap, maka hasil akhur adalah
+bilangan kelipatan dua
+, e
+at v 1. LT .
+— @
+Share Favorites Edit Delete More
