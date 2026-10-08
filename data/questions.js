@@ -1,0 +1,31 @@
+// Skema: {no,type:'single'|'multi',topic,text,options[],answer[index 0-based],steps[],img}
+// TODO AI berikutnya: tambah soal 3,5,8,11,13,15-25 (type baru 'category' & 'ds' perlu dukungan di app.js)
+window.QUESTIONS=[
+{no:1,type:'single',topic:'Himpunan',text:'A = {x | x < 6, x ∈ Bilangan Asli}\nB = {x | x bilangan genap, x ∈ Bilangan Cacah}\nC = {x | x ≤ 10, x ∈ Bilangan Prima}\n\nHasil dari (A ∩ B) ∪ C adalah ....',
+options:['{2, 3, 5, 7}','{0, 2, 3, 5, 7}','{2, 3, 4, 5, 7}','{0, 2, 3, 4, 5, 7}','{2, 3, 4, 5, 7, 10}'],answer:[2],
+steps:['Irisan (∩) = cari angka yang sama; Gabungan (∪) = satukan semua.','A = {1, 2, 3, 4, 5}; B = {0, 2, 4, 6, 8, …}; C = {2, 3, 5, 7}.','A ∩ B = {2, 4}.','(A ∩ B) ∪ C = {2, 4} ∪ {2, 3, 5, 7} = {2, 3, 4, 5, 7}. Jawaban: c.'],img:'assets/kunci-01-02.jpeg'},
+{no:2,type:'single',topic:'Bilangan Berpangkat',text:'Bentuk sederhana dari\n(3^(2/3) × 8^(3/2)) / (2^(5/2) × 9^(5/6)) adalah ....',
+options:['1/42','2/3','4/3','6','12'],answer:[2],
+steps:['Ubah ke basis prima: 8 = 2³ dan 9 = 3².','Pembilang: 3^(2/3) × (2³)^(3/2) = 3^(2/3) × 2^(9/2).','Penyebut: 2^(5/2) × (3²)^(5/6) = 2^(5/2) × 3^(5/3).','Bagi basis sama, kurangkan pangkat: 2^(9/2 − 5/2) × 3^(2/3 − 5/3) = 2² × 3⁻¹.','= 4 × 1/3 = 4/3. Jawaban: c.'],img:'assets/kunci-01-02.jpeg'},
+{no:4,type:'single',topic:'Fungsi Linear',text:'Model kenaikan suhu akibat pemanasan global: y = 0,02x − 39,9 (x = tahun, y = kenaikan suhu dalam °C).\n\nPada tahun berapakah kenaikan suhu diperkirakan mencapai 0,7 °C?',
+options:['Tahun 2000','Tahun 2003','Tahun 2025','Tahun 2030','Tahun 2345'],answer:[3],
+steps:['Substitusi y = 0,7: 0,7 = 0,02x − 39,9.','Pindahkan: 0,02x = 0,7 + 39,9 = 40,6.','x = 40,6 / 0,02 = 2030. Jawaban: d.'],img:'assets/kunci-04.jpeg'},
+{no:6,type:'single',topic:'Barisan Aritmetika',text:'Baris kursi paling bawah memegang 400 kertas, baris kedua 550 kertas, dan seterusnya bertambah dengan pola yang sama.\n\nJika pola berlaku sampai baris ketujuh, berapa penonton yang memegang kertas di baris ke-5?',
+options:['700 orang','850 orang','1.000 orang','1.150 orang','1.300 orang'],answer:[2],
+steps:['Selisih tiap baris: 550 − 400 = 150 (beda tetap → barisan aritmetika).','Baris 1 = 400, baris 2 = 550, baris 3 = 700, baris 4 = 850, baris 5 = 1.000.','Jawaban: c. 1.000 orang.'],img:'assets/kunci-06-07.jpeg'},
+{no:7,type:'multi',topic:'Barisan Geometri',text:'Kadar asam urat awal (hari ke-1) 13 mg/dL. Obat menurunkan kadar 20% setiap hari (sisa 80%).\n• Nyaman jika kadar di bawah 7 mg/dL.\n• Sembuh klinis jika kadar kurang dari 5 mg/dL.\n\nPada hari keberapa pasien merasa nyaman namun belum dianggap sembuh?\n(Pilih semua jawaban benar)',
+options:['Hari ke-2','Hari ke-3','Hari ke-4','Hari ke-5','Hari ke-6'],answer:[2,3],
+steps:['Kadar sisa tiap hari = 80% = 80/100 dari hari sebelumnya.','H1 = 13; H2 = 0,8×13 = 10,4; H3 = 0,8×10,4 = 8,32.','H4 = 0,8×8,32 = 6,656 (<7 → nyaman, belum <5).','H5 = 0,8×6,656 = 5,3248 (masih nyaman, belum <5).','H6 = 0,8×5,3248 = 4,2598 (<5 → sembuh).','Nyaman tapi belum sembuh: hari ke-4 dan ke-5.'],img:'assets/kunci-06-07.jpeg'},
+{no:9,type:'single',topic:'Sistem Persamaan Linear',text:'Misal mawar = a, lili = b, anyelir = c.\nBuket A: 2a + 3b + c = Rp85.000\nBuket B: a + 2b + 2c = Rp70.000\nBuket C: 3a + b + c = Rp75.000\n(Komposisi dibaca dari gambar buket.)\n\nPembeli membeli buket tipe C dan menambah 2 tangkai lili + 1 tangkai anyelir (harga satuan). Total yang dibayar?',
+options:['Rp75.000','Rp102.000','Rp110.000','Rp115.000','Rp116.000'],answer:[3],
+steps:['Eliminasi (1) & (2): kalikan (2) dengan 2 lalu kurangkan dengan (1) → b + 3c = 55.000 …(3).','Eliminasi (2) & (3): kalikan (2) dengan 3 lalu kurangkan dengan (3) → 5b + 5c = 135.000 …(4).','Eliminasi (3) & (4): 10c = 140.000 → c = 14.000.','Substitusi ke (3): b + 42.000 = 55.000 → b = 13.000.','Total = buket C + 2b + c = 75.000 + 26.000 + 14.000 = Rp115.000. Jawaban: d.'],img:'assets/kunci-09.jpeg'},
+{no:10,type:'multi',topic:'Hubungan Sudut',text:'Pada gambar (segitiga dengan dua garis sejajar dipotong satu garis miring; sudut A, F, E, B, D, C — lihat foto kunci setelah menjawab), pasangan sudut manakah yang membentuk 180°?\n(Pilih semua jawaban benar)',
+options:['∠A dan ∠B','∠A dan ∠E','∠B dan ∠C','∠B dan ∠D','∠E dan ∠C'],answer:[2,3,4],
+steps:['∠F dan ∠C sehadap → ∠F = ∠C. ∠F dan ∠E berpelurus → ∠F + ∠E = 180°, sehingga ∠E + ∠C = 180° ✓.','∠B dan ∠D berpelurus → ∠B + ∠D = 180° ✓.','∠C dan ∠D berseberangan → ∠C = ∠D, sehingga ∠B + ∠C = 180° ✓.','Jawaban: ∠B & ∠C, ∠B & ∠D, ∠E & ∠C.'],img:'assets/kunci-10.jpeg'},
+{no:12,type:'single',topic:'Kesebangunan',text:'Trapesium KLMN dan NMPO sebangun. OP = 18 cm, KN = 16 cm, KL = 32 cm (PR tegak lurus KL, Q di perpotongan PR dan NM; lihat foto kunci).\n\nBerapakah panjang sisi LM?',
+options:['6√5 cm','8√5 cm','9√5 cm','10√5 cm','14√5 cm'],answer:[1],
+steps:['Sebangun: KL/MN = MN/OP → 32/MN = MN/18 → MN² = 576 → MN = 24 cm.','KN/NO = KL/MN → 16/NO = 32/24 → NO = 12 cm, jadi PQ = 12 cm.','QM = MN − OP = 24 − 18 = 6 → PM = √(6² + 12²) = √180 = 6√5.','RL = KL − KR = 32 − 18 = 14; PR = 12 + 16 = 28 → PL = √(14² + 28²) = √980 = 14√5.','LM = PL − PM = 14√5 − 6√5 = 8√5 cm. Jawaban: b.'],img:'assets/kunci-12.jpeg'},
+{no:14,type:'single',topic:'Transformasi Geometri',text:'B direfleksikan oleh garis y = 1, kemudian dirotasikan 180° searah jarum jam berpusat di O(0,0). Bayangannya B′ = (−4, 1).\n\nTitik B yang sesuai adalah ....',
+options:['B(4, −1)','B(4, 3)','B(−6, −1)','B(−2, −1)','B(2, 4)'],answer:[1],
+steps:['Refleksi y=1: (x, y) → (x, 2−y). Rotasi 180°: (x, y) → (−x, −y).','Komposisi: (x, y) → (−x, −(2−y)) = (−x, y−2).','Samakan dengan B′(−4, 1): −x = −4 → x = 4; y − 2 = 1 → y = 3.','B(4, 3). Jawaban: b.'],img:'assets/kunci-14.jpeg'}
+];
